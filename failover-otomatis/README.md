@@ -1,4 +1,4 @@
-<h1>abmujib/mikrotik-failover-otomatis</h1>
+# FILEOVER OTOMATIS
 Skrip MikroTik untuk mengatur failover otomatis antara 2 atau lebih sumber Internet
 
 ## Langkah #1: 
