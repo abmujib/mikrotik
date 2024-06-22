@@ -1,4 +1,4 @@
-<h1>abmujib/mikrotik-isolir-pppoe</h1>
+# ISOLIR PPPoE
 Skrip MikroTik untuk Isolir Pelanggan PPPoE
 
 ## Langkah #1: 
