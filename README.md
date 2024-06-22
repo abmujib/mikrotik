@@ -1,5 +1,7 @@
 # MIKROTIK SCRIPT
-Kumpulan skrip MikroTik gratis.
+Kumpulan skrip MikroTik gratis dibuat dengan ❤️ oleh [Ab Mujib](https://github.com/abmujib)
+<p>Fork dan Star ⭐ jika ini membantu.</p>
+<p><a href="https://trakteer.id/abmujib"><img src="https://img.shields.io/static/v1?label=Trakteer Kopi&message=abmujib&color=C02433"></a></p>
 
 ## Daftar Isi
 
