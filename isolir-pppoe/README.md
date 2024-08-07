@@ -44,6 +44,6 @@ Skrip MikroTik untuk Isolir Pelanggan PPPoE
 	
 ## Langkah #7:
 * Download file error.html
-	[Download error.html](https://raw.githubusercontent.com/abmujib/mikrotik-isolir-pppoe/main/error.html)
+	[Download error.html]([https://raw.githubusercontent.com/abmujib/mikrotik-isolir-pppoe/main/error.html](https://raw.githubusercontent.com/abmujib/mikrotik/main/isolir-pppoe/error.html))
 
 Catatan: Silakan sesuaikan lokasi dan nama folder yang ditandai di atas dengan tipe penyimpanan Mikrotik Anda, misalnya menjadi /file remove flash/webproxy/error.html atau bisa /file remove disk/webproxy/error.html
