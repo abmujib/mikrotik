@@ -7,3 +7,5 @@ Kumpulan skrip MikroTik gratis dibuat dengan ❤️ oleh [Ab Mujib](https://gith
 
 - [![Skrip Isolir PPPoE](https://img.shields.io/badge/Skrip-Isolir%20PPPoE-blue)](isolir-pppoe)
 - [![Skrip Failover Otomatis](https://img.shields.io/badge/Skrip-Failover%20Otomatis-blue)](failover-otomatis)
+- [![Skrip Load Balance](https://img.shields.io/badge/Skrip-Load%20Balance-blue)](load-balance)
+- [![Skrip Otomatis PPPoE Rate Switch](https://img.shields.io/badge/Skrip-PPPoE%20Switch-blue)](pppoe-rate-switch)
