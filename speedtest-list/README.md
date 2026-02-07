@@ -1,3 +1,4 @@
+```shell
 /ip firewall address-list
 add address=192.168.25.0/24 list=LOCAL
 add address=192.168.35.0/24 list=LOCAL
@@ -83,3 +84,4 @@ add address=status.ui.com list=speedtest-list
 add address=www.nperf.com list=speedtest-list
 add address=speed.is list=speedtest-list
 add address=whatsmyip.com list=speedtest-list
+```
