@@ -1,7 +1,5 @@
 ```shell
 /ip firewall address-list
-add address=192.168.25.0/24 list=LOCAL
-add address=192.168.35.0/24 list=LOCAL
 add address=yougetsignal.com list=speedtest-list
 add address=xmyip.com list=speedtest-list
 add address=www.yougetsignal.com list=speedtest-list
