@@ -1,4 +1,4 @@
-``shell
+```shell
 /ip dhcp-client add interface="ether1" add-default-route=no disabled=no
 /ip dhcp-client add interface="ether2" add-default-route=no disabled=no
 /ip dhcp-client add interface="ether3" add-default-route=no disabled=no
@@ -85,4 +85,4 @@
 /ip firewall mangle add action=mark-routing chain=prerouting connection-mark="via-ether7" new-routing-mark="via-ISP7" passthrough=yes dst-address-list=!LOCAL src-address-list=LOCAL
 /ip firewall mangle add action=mark-routing chain=prerouting connection-mark="via-ether8" new-routing-mark="via-ISP8" passthrough=yes dst-address-list=!LOCAL src-address-list=LOCAL
 /
-``
+```
