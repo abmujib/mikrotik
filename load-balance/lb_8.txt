@@ -1,4 +1,4 @@
-```shell
+# Konfigurasi DHCP Client
 /ip dhcp-client add interface="ether1" add-default-route=no disabled=no
 /ip dhcp-client add interface="ether2" add-default-route=no disabled=no
 /ip dhcp-client add interface="ether3" add-default-route=no disabled=no
@@ -8,14 +8,22 @@
 /ip dhcp-client add interface="ether7" add-default-route=no disabled=no
 /ip dhcp-client add interface="ether8" add-default-route=no disabled=no
 /
+
+# Konfigurasi DNS Server
 /ip dns set allow-remote-requests=yes servers=8.8.8.8,8.8.4.4
 /
+
+# Konfigurasi NAT
 /ip firewall nat add action=masquerade chain=srcnat comment="Global NAT Masquerade - STEKSA" place-before=*0
 /
+
+# Pengelompokan IP Lokal
 /ip firewall address-list add address=10.0.0.0/8 list=LOCAL
 /ip firewall address-list add address=172.16.0.0/12 list=LOCAL
 /ip firewall address-list add address=192.168.0.0/16 list=LOCAL
 /
+
+# Tabel Routing
 /routing table add name="via-ISP1" fib
 /routing table add name="via-ISP2" fib
 /routing table add name="via-ISP3" fib
@@ -25,6 +33,8 @@
 /routing table add name="via-ISP7" fib
 /routing table add name="via-ISP8" fib
 /
+
+# Rute Default Global (Untuk Failover)
 /ip route add check-gateway=ping distance=1 gateway="192.168.11.1"
 /ip route add check-gateway=ping distance=2 gateway="192.168.12.1"
 /ip route add check-gateway=ping distance=3 gateway="192.168.13.1"
@@ -34,6 +44,8 @@
 /ip route add check-gateway=ping distance=7 gateway="192.168.17.1"
 /ip route add check-gateway=ping distance=8 gateway="192.168.18.1"
 /
+
+# Rute Spesifik untuk Load Balancing
 /ip route add check-gateway=ping distance=1 gateway="192.168.11.1" routing-table="via-ISP1"
 /ip route add check-gateway=ping distance=1 gateway="192.168.12.1" routing-table="via-ISP2"
 /ip route add check-gateway=ping distance=1 gateway="192.168.13.1" routing-table="via-ISP3"
@@ -43,12 +55,16 @@
 /ip route add check-gateway=ping distance=1 gateway="192.168.17.1" routing-table="via-ISP7"
 /ip route add check-gateway=ping distance=1 gateway="192.168.18.1" routing-table="via-ISP8"
 /
+
+# Pengecualian Trafik Lokal (Bypass Local Traffic)
 /ip firewall mangle add action=accept chain=prerouting dst-address-list=LOCAL src-address-list=LOCAL comment="Accept All LOCAL IP - STEKSA"
 /ip firewall mangle add action=accept chain=postrouting dst-address-list=LOCAL src-address-list=LOCAL
 /ip firewall mangle add action=accept chain=forward dst-address-list=LOCAL src-address-list=LOCAL
 /ip firewall mangle add action=accept chain=input dst-address-list=LOCAL src-address-list=LOCAL
 /ip firewall mangle add action=accept chain=output dst-address-list=LOCAL src-address-list=LOCAL
 /
+
+# Penandaan Trafik Masuk (Mangle Input - Mark Connection)
 /ip firewall mangle add action=mark-connection chain=input in-interface="ether1" new-connection-mark="via-ether1" passthrough=yes comment="Load Balance PCC - STEKSA"
 /ip firewall mangle add action=mark-connection chain=input in-interface="ether2" new-connection-mark="via-ether2" passthrough=yes
 /ip firewall mangle add action=mark-connection chain=input in-interface="ether3" new-connection-mark="via-ether3" passthrough=yes
@@ -58,6 +74,8 @@
 /ip firewall mangle add action=mark-connection chain=input in-interface="ether7" new-connection-mark="via-ether7" passthrough=yes
 /ip firewall mangle add action=mark-connection chain=input in-interface="ether8" new-connection-mark="via-ether8" passthrough=yes
 /
+
+# Penandaan Trafik Keluar dari Router (Mangle Output - Mark Routing)
 /ip firewall mangle add action=mark-routing chain=output connection-mark="via-ether1" new-routing-mark="via-ISP1" passthrough=yes
 /ip firewall mangle add action=mark-routing chain=output connection-mark="via-ether2" new-routing-mark="via-ISP2" passthrough=yes
 /ip firewall mangle add action=mark-routing chain=output connection-mark="via-ether3" new-routing-mark="via-ISP3" passthrough=yes
@@ -67,6 +85,8 @@
 /ip firewall mangle add action=mark-routing chain=output connection-mark="via-ether7" new-routing-mark="via-ISP7" passthrough=yes
 /ip firewall mangle add action=mark-routing chain=output connection-mark="via-ether8" new-routing-mark="via-ISP8" passthrough=yes
 /
+
+# Pembagian Beban / Inti PCC (Mangle Prerouting - Mark Connection)
 /ip firewall mangle add action=mark-connection chain=prerouting dst-address-type=!local new-connection-mark="via-ether1" passthrough=yes per-connection-classifier=both-addresses-and-ports:8/0 dst-address-list=!LOCAL src-address-list=LOCAL
 /ip firewall mangle add action=mark-connection chain=prerouting dst-address-type=!local new-connection-mark="via-ether2" passthrough=yes per-connection-classifier=both-addresses-and-ports:8/1 dst-address-list=!LOCAL src-address-list=LOCAL
 /ip firewall mangle add action=mark-connection chain=prerouting dst-address-type=!local new-connection-mark="via-ether3" passthrough=yes per-connection-classifier=both-addresses-and-ports:8/2 dst-address-list=!LOCAL src-address-list=LOCAL
@@ -76,6 +96,8 @@
 /ip firewall mangle add action=mark-connection chain=prerouting dst-address-type=!local new-connection-mark="via-ether7" passthrough=yes per-connection-classifier=both-addresses-and-ports:8/6 dst-address-list=!LOCAL src-address-list=LOCAL
 /ip firewall mangle add action=mark-connection chain=prerouting dst-address-type=!local new-connection-mark="via-ether8" passthrough=yes per-connection-classifier=both-addresses-and-ports:8/7 dst-address-list=!LOCAL src-address-list=LOCAL
 /
+
+# Pengeksekusian Rute (Mangle Prerouting - Mark Routing)
 /ip firewall mangle add action=mark-routing chain=prerouting connection-mark="via-ether1" new-routing-mark="via-ISP1" passthrough=yes dst-address-list=!LOCAL src-address-list=LOCAL
 /ip firewall mangle add action=mark-routing chain=prerouting connection-mark="via-ether2" new-routing-mark="via-ISP2" passthrough=yes dst-address-list=!LOCAL src-address-list=LOCAL
 /ip firewall mangle add action=mark-routing chain=prerouting connection-mark="via-ether3" new-routing-mark="via-ISP3" passthrough=yes dst-address-list=!LOCAL src-address-list=LOCAL
@@ -85,4 +107,3 @@
 /ip firewall mangle add action=mark-routing chain=prerouting connection-mark="via-ether7" new-routing-mark="via-ISP7" passthrough=yes dst-address-list=!LOCAL src-address-list=LOCAL
 /ip firewall mangle add action=mark-routing chain=prerouting connection-mark="via-ether8" new-routing-mark="via-ISP8" passthrough=yes dst-address-list=!LOCAL src-address-list=LOCAL
 /
-```
