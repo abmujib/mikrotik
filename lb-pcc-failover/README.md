@@ -50,3 +50,10 @@ add dst-address=0.0.0.0/0 gateway=1.0.0.2 routing-table=to_ISP2 check-gateway=pi
 add dst-address=0.0.0.0/0 gateway=1.0.0.1 routing-table=main check-gateway=ping distance=1 target-scope=11 comment="Main Failover Route 1"
 add dst-address=0.0.0.0/0 gateway=1.0.0.2 routing-table=main check-gateway=ping distance=2 target-scope=11 comment="Main Failover Route 2"
 ```
+
+Catatan:
+Jika menggunakan hotspot pastikan menambahakan skrip berikut:
+```shell
+/ip firewall mangle
+add chain=prerouting src-address-list=LOCAL hotspot=!auth action=accept place-before=0 comment="Bypass Hotspot"
+```
