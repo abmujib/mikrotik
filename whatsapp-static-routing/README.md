@@ -103,9 +103,9 @@ MIT License — Free to use & modify.
 
 🌟 Support
 Jika script ini membantu:
-<p>⭐ Star repository ini</p>
-<p>🍴 Fork untuk pengembangan</p>
-<p>🛠️ Kontribusi sangat terbuka</p>
+- ⭐ Star repository ini
+- 🍴 Fork untuk pengembangan
+- 🛠️ Kontribusi sangat terbuka<
 
 <p align="center">
   <b>Made with ❤️ for MikroTik Engineers & Network Administrators</b>
