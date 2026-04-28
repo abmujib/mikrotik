@@ -101,7 +101,7 @@ Pull Request terbuka untuk:
 # 📜 License
 MIT License — Free to use & modify.
 
-🌟 Support
+# 🌟 Support
 Jika script ini membantu:
 - ⭐ Star repository ini
 - 🍴 Fork untuk pengembangan
